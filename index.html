@@ -9,7 +9,6 @@
 :root{
   --text:#fff;--muted:rgba(255,255,255,0.6);--muted2:rgba(255,255,255,0.3);
   --card:rgba(255,255,255,0.07);--bdr:rgba(255,255,255,0.13);
-  --green:#27ae60;--blue:#2980b9;--red:#e74c3c;--orange:#f39c12;
   --r:14px;
 }
 html,body{
@@ -19,8 +18,6 @@ html,body{
   font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   font-size:15px;overflow-x:hidden;
 }
-
-/* HEADER */
 .hdr{padding:13px 16px 9px;background:rgba(5,18,35,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
 .hdr-row{display:flex;align-items:center;gap:10px;}
 .hdr-row img{height:40px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));}
@@ -29,12 +26,10 @@ html,body{
 .wave-bar{height:3px;background:linear-gradient(90deg,#1a5276,#2980b9,#1a5276);background-size:200%;animation:wave 2s linear infinite;border-radius:2px;margin-top:8px;}
 @keyframes wave{to{background-position:200%;}}
 
-/* TABS */
 .tab-bar{display:flex;background:rgba(0,0,0,.25);border-bottom:1px solid var(--bdr);}
-.tab{flex:1;padding:11px 4px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;transition:color .15s;border-bottom:2px solid transparent;}
+.tab{flex:1;padding:11px 4px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:color .15s;}
 .tab.on{color:#fff;border-bottom-color:#5dade2;}
 
-/* MAIN */
 .main{padding:14px 14px 50px;}
 .view{display:none;}.view.on{display:block;}
 
@@ -42,51 +37,64 @@ html,body{
 .form-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:14px;}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.8px;}
-.field input,.field select{
-  background:rgba(255,255,255,.1);border:1px solid var(--bdr);border-radius:10px;
-  color:#fff;font-size:15px;padding:12px 14px;width:100%;-webkit-appearance:none;
-}
+.field input{background:rgba(255,255,255,.1);border:1px solid var(--bdr);border-radius:10px;color:#fff;font-size:15px;padding:12px 14px;width:100%;}
 .field input::placeholder{color:var(--muted2);}
 .field input:focus{outline:none;border-color:rgba(93,173,226,.6);background:rgba(255,255,255,.13);}
 .time-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .divider{height:1px;background:var(--bdr);}
-
-/* BUTTONS */
 .submit-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#1a6a2a,#27ae60);border:none;border-radius:var(--r);width:100%;padding:15px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(39,174,96,.4);transition:opacity .15s,transform .1s;}
 .submit-btn:active{opacity:.85;transform:scale(.98);}
 
-/* TOAST */
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.95);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.err{background:rgba(231,76,60,.95);}
+/* CALENDAR */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.cal-title{font-size:15px;font-weight:700;}
+.cal-nav{display:flex;gap:8px;}
+.cal-nav button{background:rgba(255,255,255,.1);border:1px solid var(--bdr);border-radius:8px;color:#fff;font-size:13px;padding:6px 12px;cursor:pointer;}
+.cal-nav button:active{background:rgba(255,255,255,.2);}
 
-/* ADMIN */
-.admin-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.admin-title{font-size:16px;font-weight:700;}
-.count-badge{font-size:11px;background:rgba(41,128,185,.3);border:1px solid rgba(93,173,226,.4);border-radius:20px;padding:3px 10px;color:#7ec8e3;}
-.date-filter{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
-.date-filter input{flex:1;background:rgba(255,255,255,.1);border:1px solid var(--bdr);border-radius:10px;color:#fff;font-size:14px;padding:9px 12px;}
-.date-filter input:focus{outline:none;border-color:rgba(93,173,226,.6);}
-.today-btn{font-size:11px;font-weight:600;color:#7ec8e3;background:rgba(41,128,185,.2);border:1px solid rgba(93,173,226,.3);border-radius:8px;padding:7px 10px;cursor:pointer;white-space:nowrap;}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px;}
+.day-col{
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:12px;padding:8px 4px;text-align:center;
+  cursor:pointer;transition:all .15s;min-height:70px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.day-col:active{background:rgba(255,255,255,.12);}
+.day-col.today{border-color:rgba(93,173,226,.6);background:rgba(41,128,185,.15);}
+.day-col.selected{border-color:#5dade2;background:rgba(41,128,185,.25);}
+.day-col.has-booking{border-color:rgba(39,174,96,.4);}
+.day-name{font-size:10px;color:var(--muted);font-weight:600;}
+.day-col.sun .day-name,.day-col.sun .day-num{color:#f1948a;}
+.day-col.sat .day-name,.day-col.sat .day-num{color:#7ec8e3;}
+.day-num{font-size:16px;font-weight:700;line-height:1;}
+.day-count{font-size:10px;font-weight:700;background:rgba(39,174,96,.25);color:#58d68d;border-radius:10px;padding:2px 6px;min-width:20px;}
+.day-count.zero{background:transparent;color:transparent;}
 
-/* 예약 카드 */
-.booking-list{display:flex;flex-direction:column;gap:10px;}
-.bk-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:13px 14px;}
+/* 선택된 날 예약 목록 */
+.selected-date-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.sel-date-txt{font-size:14px;font-weight:700;}
+.sel-count{font-size:11px;background:rgba(41,128,185,.3);border:1px solid rgba(93,173,226,.4);border-radius:20px;padding:3px 10px;color:#7ec8e3;}
+
+.booking-list{display:flex;flex-direction:column;gap:9px;}
+.bk-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 13px;}
 .bk-card.out{border-color:rgba(41,128,185,.5);background:rgba(41,128,185,.08);}
 .bk-card.done{opacity:.5;}
-.bk-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.bk-name{font-size:15px;font-weight:700;}
-.bk-boat{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.bk-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+.bk-name{font-size:14px;font-weight:700;}
+.bk-boat{font-size:11px;color:var(--muted);margin-bottom:7px;}
 .st-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;}
 .st-wait{background:rgba(243,156,18,.2);color:#f9ca74;}
 .st-out{background:rgba(41,128,185,.25);color:#7ec8e3;}
 .st-done{background:rgba(39,174,96,.2);color:#58d68d;}
-.bk-times{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
-.bk-time-box{background:rgba(255,255,255,.05);border-radius:8px;padding:7px 10px;}
-.bk-time-lbl{font-size:9px;color:var(--muted);margin-bottom:2px;}
+.bk-times{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px;}
+.bk-time-box{background:rgba(255,255,255,.05);border-radius:8px;padding:6px 9px;}
+.bk-time-lbl{font-size:9px;color:var(--muted);margin-bottom:1px;}
 .bk-time-val{font-size:14px;font-weight:700;}
-.bk-actions{display:flex;gap:7px;}
-.act-btn{flex:1;padding:8px 4px;text-align:center;border:1px solid var(--bdr);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;background:none;color:#fff;transition:background .15s;}
+.bk-actions{display:flex;gap:6px;}
+.act-btn{flex:1;padding:7px 4px;text-align:center;border:1px solid var(--bdr);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;background:none;color:#fff;}
 .act-btn.blue{border-color:rgba(93,173,226,.5);color:#7ec8e3;}
 .act-btn.blue:active{background:rgba(41,128,185,.2);}
 .act-btn.green{border-color:rgba(39,174,96,.5);color:#58d68d;}
@@ -95,26 +103,21 @@ html,body{
 .act-btn.red:active{background:rgba(231,76,60,.15);}
 .act-btn.gray{color:var(--muted);}
 
-.empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:13px;line-height:1.8;}
-.empty-ico{font-size:40px;margin-bottom:10px;}
+.empty{text-align:center;padding:30px 20px;color:var(--muted);font-size:13px;line-height:1.8;}
+.empty-ico{font-size:32px;margin-bottom:8px;}
 
-/* LOCK */
-.lock-wrap{display:flex;flex-direction:column;align-items:center;padding:60px 20px;gap:14px;text-align:center;}
-.lock-ico{font-size:48px;}
-.lock-title{font-size:18px;font-weight:700;}
-.lock-sub{font-size:12px;color:var(--muted);line-height:1.6;}
-.lock-input{width:100%;max-width:260px;background:rgba(255,255,255,.1);border:1px solid var(--bdr);border-radius:12px;color:#fff;font-size:20px;padding:14px;text-align:center;letter-spacing:6px;}
-.lock-input:focus{outline:none;border-color:rgba(93,173,226,.6);}
-.lock-btn{width:100%;max-width:260px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;padding:14px;cursor:pointer;}
-
-/* LOADING */
-.loading{text-align:center;padding:30px;color:var(--muted);font-size:13px;}
-.spin{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,.2);border-top-color:#5dade2;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:8px;}
-@keyframes sp{to{transform:rotate(360deg);}}
-
-/* 실시간 표시 */
 .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2ecc71;box-shadow:0 0 6px #2ecc71;margin-right:5px;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.95);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.err{background:rgba(231,76,60,.95);}
+
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#5dade2;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.loading{text-align:center;padding:24px;color:var(--muted);font-size:12px;}
+
+.sync-txt{font-size:10px;color:var(--muted);margin-bottom:12px;}
 </style>
 </head>
 <body>
@@ -132,7 +135,7 @@ html,body{
 
 <div class="tab-bar">
   <button class="tab on" onclick="switchTab('book',this)">🚢 런칭 예약</button>
-  <button class="tab" onclick="switchTab('admin',this)">📋 예약 현황</button>
+  <button class="tab" onclick="switchTab('admin',this)">📅 예약 현황</button>
 </div>
 
 <div class="main">
@@ -140,17 +143,14 @@ html,body{
   <!-- 예약 탭 -->
   <div class="view on" id="view-book">
     <div class="form-card">
-
       <div class="field">
         <label>📅 날짜</label>
         <input type="date" id="f-date">
       </div>
-
       <div class="field">
         <label>🚤 선명</label>
         <input type="text" id="f-boat" placeholder="선명을 입력하세요">
       </div>
-
       <div class="field">
         <label>⏰ 출항 시간 / 입항 시간</label>
         <div class="time-row">
@@ -158,40 +158,46 @@ html,body{
           <input type="time" id="f-in">
         </div>
       </div>
-
       <div class="field">
         <label>👤 예약자 이름</label>
         <input type="text" id="f-name" placeholder="이름을 입력하세요">
       </div>
-
       <div class="divider"></div>
-
-      <button class="submit-btn" onclick="submitBooking()">
-        ✅&nbsp;&nbsp;예약 등록
-      </button>
-
+      <button class="submit-btn" onclick="submitBooking()">✅&nbsp;&nbsp;예약 등록</button>
     </div>
   </div>
 
-  <!-- 관리자 탭 -->
+  <!-- 예약 현황 탭 (캘린더) -->
   <div class="view" id="view-admin">
 
-    <!-- 현황 패널 -->
-    <div id="admin-panel">
-      <div class="admin-hd">
-        <div>
-          <div class="admin-title"><span class="live-dot"></span>실시간 예약 현황</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="last-sync">--</div>
-        </div>
-        <span class="count-badge" id="count-badge">0건</span>
+    <div class="cal-header">
+      <div>
+        <div class="cal-title"><span class="live-dot"></span>예약 현황</div>
+        <div class="sync-txt" id="sync-txt">--</div>
       </div>
-
-      <div class="date-filter">
-        <input type="date" id="filter-date" onchange="loadBookings()">
-        <button class="today-btn" onclick="setToday()">오늘</button>
+      <div class="cal-nav">
+        <button onclick="moveWeek(-1)">◀ 이전</button>
+        <button onclick="moveWeek(1)">다음 ▶</button>
       </div>
+    </div>
 
-      <div id="booking-list"><div class="loading"><span class="spin"></span>불러오는 중...</div></div>
+    <!-- 주간 캘린더 -->
+    <div class="week-grid" id="week-grid"></div>
+
+    <!-- 선택된 날 예약 목록 -->
+    <div id="day-detail" style="display:none;">
+      <div class="selected-date-hd">
+        <div class="sel-date-txt" id="sel-date-txt">--</div>
+        <span class="sel-count" id="sel-count">0건</span>
+      </div>
+      <div class="booking-list" id="booking-list">
+        <div class="loading"><span class="spin"></span>불러오는 중...</div>
+      </div>
+    </div>
+
+    <div id="no-select" class="empty">
+      <div class="empty-ico">👆</div>
+      날짜를 선택하면<br>예약 목록이 표시됩니다
     </div>
 
   </div>
@@ -199,10 +205,9 @@ html,body{
 
 <div class="toast" id="toast"></div>
 
-<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import { getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp }
+import { getFirestore, collection, addDoc, query, where, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -220,17 +225,28 @@ const db  = getFirestore(app);
 const PAD  = n => String(n).padStart(2,'0');
 const DAYS = ['일','월','화','수','목','금','토'];
 
-
-let unlocked = true;
-let unsubscribe = null;
-
-// 오늘 날짜
 function todayStr() {
   const d = new Date();
   return `${d.getFullYear()}-${PAD(d.getMonth()+1)}-${PAD(d.getDate())}`;
 }
-document.getElementById('f-date').value    = todayStr();
-document.getElementById('filter-date').value = todayStr();
+
+document.getElementById('f-date').value = todayStr();
+
+// 현재 주 시작일 (일요일)
+let weekStart = getWeekStart(new Date());
+let selectedDate = todayStr();
+let allBookings = {}; // 날짜별 캐시
+let unsubscribers = {};
+
+function getWeekStart(date) {
+  const d = new Date(date);
+  d.setDate(d.getDate() - d.getDay());
+  return d;
+}
+
+function dateStr(d) {
+  return `${d.getFullYear()}-${PAD(d.getMonth()+1)}-${PAD(d.getDate())}`;
+}
 
 // 탭 전환
 window.switchTab = (name, btn) => {
@@ -238,100 +254,93 @@ window.switchTab = (name, btn) => {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
   document.getElementById('view-' + name).classList.add('on');
   btn.classList.add('on');
-  if(name === 'admin') loadBookings();
-};
-
-// 예약 등록
-window.submitBooking = async () => {
-  const date = document.getElementById('f-date').value;
-  const boat = document.getElementById('f-boat').value.trim();
-  const outT = document.getElementById('f-out').value;
-  const inT  = document.getElementById('f-in').value;
-  const name = document.getElementById('f-name').value.trim();
-
-  if(!date)          { showToast('날짜를 선택해주세요', true); return; }
-  if(!boat)          { showToast('선명을 입력해주세요', true); return; }
-  if(!outT && !inT)  { showToast('출항 또는 입항 시간을 입력해주세요', true); return; }
-  if(!name)          { showToast('예약자 이름을 입력해주세요', true); return; }
-
-  try {
-    await addDoc(collection(db, 'bookings'), {
-      date, boat,
-      outTime:   outT || '-',
-      inTime:    inT  || '-',
-      name,
-      status:    'wait',
-      createdAt: serverTimestamp()
-    });
-
-    // 초기화
-    document.getElementById('f-boat').value = '';
-    document.getElementById('f-out').value  = '';
-    document.getElementById('f-in').value   = '';
-    document.getElementById('f-name').value = '';
-    showToast('✅ 예약이 등록됐습니다!');
-  } catch(e) {
-    showToast('오류: ' + e.message, true);
+  if(name === 'admin') {
+    renderWeek();
+    subscribeWeek();
   }
 };
 
-
-
-// 오늘 버튼
-window.setToday = () => {
-  document.getElementById('filter-date').value = todayStr();
-  loadBookings();
+// 주 이동
+window.moveWeek = (dir) => {
+  weekStart = new Date(weekStart);
+  weekStart.setDate(weekStart.getDate() + dir * 7);
+  allBookings = {};
+  Object.values(unsubscribers).forEach(u => u && u());
+  unsubscribers = {};
+  renderWeek();
+  subscribeWeek();
 };
 
-// 실시간 예약 목록
-window.loadBookings = () => {
-  if(!unlocked) return;
-  const fd = document.getElementById('filter-date').value;
-  if(!fd) return;
+// 이번 주 7일 구독
+function subscribeWeek() {
+  for(let i = 0; i < 7; i++) {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    const ds = dateStr(d);
+    if(unsubscribers[ds]) continue;
 
-  if(unsubscribe) unsubscribe();
+    const q = query(collection(db, 'bookings'), where('date', '==', ds));
+    unsubscribers[ds] = onSnapshot(q, snap => {
+      allBookings[ds] = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+        .sort((a,b) => (a.outTime||'').localeCompare(b.outTime||''));
+      renderWeek();
+      if(selectedDate === ds) renderDayDetail(ds);
+      const now = new Date();
+      document.getElementById('sync-txt').textContent =
+        `실시간 동기화 · ${PAD(now.getHours())}:${PAD(now.getMinutes())}:${PAD(now.getSeconds())}`;
+    });
+  }
+}
 
-  const q = query(
-    collection(db, 'bookings'),
-    where('date', '==', fd)
-  );
+// 주간 캘린더 렌더
+function renderWeek() {
+  const grid = document.getElementById('week-grid');
+  const today = todayStr();
+  let html = '';
 
-  unsubscribe = onSnapshot(q, snap => {
-    const list = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a,b) => (a.outTime||'').localeCompare(b.outTime||''));
-    renderList(list, fd);
-    const now = new Date();
-    document.getElementById('last-sync').textContent =
-      `마지막 동기화: ${PAD(now.getHours())}:${PAD(now.getMinutes())}:${PAD(now.getSeconds())}`;
-  }, err => {
-    document.getElementById('booking-list').innerHTML =
-      `<div class="loading">⚠️ 오류: ${err.message}</div>`;
-  });
+  for(let i = 0; i < 7; i++) {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    const ds = dateStr(d);
+    const cnt = (allBookings[ds] || []).length;
+    const dayName = DAYS[d.getDay()];
+    const dayNum  = d.getDate();
+    const isToday = ds === today;
+    const isSel   = ds === selectedDate;
+    const hasBk   = cnt > 0;
+    const dow     = d.getDay() === 0 ? 'sun' : d.getDay() === 6 ? 'sat' : '';
+
+    html += `<div class="day-col ${dow}${isToday?' today':''}${isSel?' selected':''}${hasBk?' has-booking':''}"
+      onclick="selectDay('${ds}')">
+      <div class="day-name">${dayName}</div>
+      <div class="day-num">${dayNum}</div>
+      <div class="day-count ${cnt===0?'zero':''}">${cnt > 0 ? cnt : '·'}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+// 날짜 선택
+window.selectDay = (ds) => {
+  selectedDate = ds;
+  renderWeek();
+  renderDayDetail(ds);
+  document.getElementById('day-detail').style.display = 'block';
+  document.getElementById('no-select').style.display = 'none';
 };
 
-// 상태 변경
-window.changeStatus = async (id, status) => {
-  await updateDoc(doc(db, 'bookings', id), { status });
-};
+// 선택 날 예약 목록
+function renderDayDetail(ds) {
+  const d    = new Date(ds + 'T00:00:00');
+  const list = allBookings[ds] || [];
+  const label = `${d.getMonth()+1}월 ${d.getDate()}일 (${DAYS[d.getDay()]})`;
 
-// 삭제
-window.deleteBooking = async (id) => {
-  if(!confirm('이 예약을 삭제할까요?')) return;
-  await deleteDoc(doc(db, 'bookings', id));
-};
+  document.getElementById('sel-date-txt').textContent = label;
+  document.getElementById('sel-count').textContent = list.length + '건';
 
-// 렌더
-function renderList(list, fd) {
-  document.getElementById('count-badge').textContent = list.length + '건';
   const el = document.getElementById('booking-list');
-
-  if(!fd) { el.innerHTML = '<div class="empty">날짜를 선택해주세요</div>'; return; }
-
-  const d = new Date(fd + 'T00:00:00');
-  const dateLabel = `${fd} (${DAYS[d.getDay()]})`;
-
   if(list.length === 0) {
-    el.innerHTML = `<div class="empty"><div class="empty-ico">🚢</div>${dateLabel}<br>예약이 없습니다</div>`;
+    el.innerHTML = `<div class="empty"><div class="empty-ico">🚢</div>예약이 없습니다</div>`;
     return;
   }
 
@@ -343,7 +352,7 @@ function renderList(list, fd) {
 
   el.innerHTML = list.map(b => {
     const st = stMap[b.status] || stMap.wait;
-    const cc = b.status === 'out' ? ' out' : b.status === 'done' ? ' done' : '';
+    const cc = b.status==='out' ? ' out' : b.status==='done' ? ' done' : '';
     return `
     <div class="bk-card${cc}">
       <div class="bk-top">
@@ -362,14 +371,56 @@ function renderList(list, fd) {
         </div>
       </div>
       <div class="bk-actions">
-        ${b.status==='wait' ? `<button class="act-btn blue" onclick="changeStatus('${b.id}','out')">🚢 출항</button>` : ''}
-        ${b.status==='out'  ? `<button class="act-btn green" onclick="changeStatus('${b.id}','done')">⚓ 입항완료</button>` : ''}
-        ${b.status==='done' ? `<button class="act-btn gray" onclick="changeStatus('${b.id}','wait')">↩️ 되돌리기</button>` : ''}
-        <button class="act-btn red" onclick="deleteBooking('${b.id}')">🗑️ 삭제</button>
+        ${b.status==='wait' ? `<button class="act-btn blue" onclick="chgStatus('${b.id}','out')">🚢 출항</button>` : ''}
+        ${b.status==='out'  ? `<button class="act-btn green" onclick="chgStatus('${b.id}','done')">⚓ 입항완료</button>` : ''}
+        ${b.status==='done' ? `<button class="act-btn gray" onclick="chgStatus('${b.id}','wait')">↩️ 되돌리기</button>` : ''}
+        <button class="act-btn red" onclick="delBooking('${b.id}')">🗑️ 삭제</button>
       </div>
     </div>`;
   }).join('');
 }
+
+// 상태 변경
+window.chgStatus = async (id, status) => {
+  await updateDoc(doc(db, 'bookings', id), { status });
+};
+
+// 삭제
+window.delBooking = async (id) => {
+  if(!confirm('이 예약을 삭제할까요?')) return;
+  await deleteDoc(doc(db, 'bookings', id));
+};
+
+// 예약 등록
+window.submitBooking = async () => {
+  const date = document.getElementById('f-date').value;
+  const boat = document.getElementById('f-boat').value.trim();
+  const outT = document.getElementById('f-out').value;
+  const inT  = document.getElementById('f-in').value;
+  const name = document.getElementById('f-name').value.trim();
+
+  if(!date)         { showToast('날짜를 선택해주세요', true); return; }
+  if(!boat)         { showToast('선명을 입력해주세요', true); return; }
+  if(!outT && !inT) { showToast('출항 또는 입항 시간을 입력해주세요', true); return; }
+  if(!name)         { showToast('예약자 이름을 입력해주세요', true); return; }
+
+  try {
+    await addDoc(collection(db, 'bookings'), {
+      date, boat,
+      outTime:   outT || '-',
+      inTime:    inT  || '-',
+      name, status: 'wait',
+      createdAt: serverTimestamp()
+    });
+    document.getElementById('f-boat').value = '';
+    document.getElementById('f-out').value  = '';
+    document.getElementById('f-in').value   = '';
+    document.getElementById('f-name').value = '';
+    showToast('✅ 예약이 등록됐습니다!');
+  } catch(e) {
+    showToast('오류: ' + e.message, true);
+  }
+};
 
 // 토스트
 window.showToast = (msg, isErr=false) => {
@@ -378,6 +429,9 @@ window.showToast = (msg, isErr=false) => {
   t.className = 'toast show' + (isErr ? ' err' : '');
   setTimeout(() => t.className = 'toast', 2500);
 };
+
+// 초기 렌더
+renderWeek();
 </script>
 </body>
 </html>
